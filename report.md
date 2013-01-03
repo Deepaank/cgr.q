@@ -1,21 +1,21 @@
-Using Q Machine to Analyze Multiple Prokaryote Genomes
+Using QMachine to Analyze Multiple Prokaryote Genomes
 ======================================================
 
 In this experiment, we'll look for the longest similar segment in the fourteen
 *Streptococcus pneumoniae* strains for which the full genomes are available at
 NCBI's FTP site, as of April 30, 2012.
 
-<script async src="https://qmachine.org/q.js"></script>
+<script async src="https://www.qmachine.org/q.js"></script>
 
-The first step is to make Q Machine's JavaScript library available, either by
+The first step is to make QMachine's JavaScript library available, either by
 including it in the HTML of a webpage via
 
-    <script src="https://qmachine.org/q.js"></script>
+    <script src="https://www.qmachine.org/q.js"></script>
 
 or by loading it programmatically in JavaScript with
 
     s = document.createElement('script');
-    s.src = 'https://qmachine.org/q.js';
+    s.src = 'https://www.qmachine.org/q.js';
     document.body.appendChild(s);
 
 In this illustration, we will distribute the mapReduce decomposition of
