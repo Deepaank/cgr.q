@@ -5,7 +5,7 @@ function y = fasta2js(DIR)
 
 %   Example:
 %
-%   >> fasta2js([pwd '/Pneumo/*.fna'])  % (assuming pwd -> repository root)
+%   >> fasta2js([pwd '/data/*.fna'])  % (assuming pwd -> repository root)
 
 d = dir(DIR);
 

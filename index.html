@@ -1,197 +1,37 @@
 <!DOCTYPE html>
 <!--
     index.html ~~
-                                                    ~~ (c) JSA and SRW, 2012
+                                                        ~~ (c) SRW, 28 Feb 2013
+                                                    ~~ last updated 28 Feb 2013
 -->
+<!--[if IE]><![endif]-->
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <title>FASTA Demo for QMachine</title>
-    <script>
-      (function () {
-          'use strict';
-       // This function immediately redirects the browser to a new URL that
-       // has query parameters explicitly specified in order to demonstrate
-       // their analogy to command-line arguments for the example daemon.
-          if (location.search.slice(1) === '') {
-              location.search = 'fasta-demo';
-          }
-          return;
-      }());
-    </script>
-    <link rel="stylesheet" href="./style.css"/>
-    <link rel="shortcut icon" href="https://qmachine.org/favicon.ico"/>
+    <meta charset="utf-8">
+    <meta name="author" content="Sean Wilkinson">
+    <title>index.html</title>
+    <style>
+        div.error {
+            color: red;
+        }
+        div.output {
+            color: black;
+        }
+    </style>
+    <link rel="shortcut icon" href="https://v1.qmachine.org/favicon.ico">
   </head>
   <body>
     <noscript>This page requires JavaScript.</noscript>
-    <h1>Using QMachine to Analyze Multiple Prokaryote Genomes</h1>
+    <h1>QMachine Demonstration</h1>
     <div>
-      In this experiment we will look for the longest similar segment in the
-      fourteen <i>Streptococcus pneumoniae</i> strains for which full genomes
-      are available on
-      <a href="ftp://ftp.ncbi.nih.gov/genomes/Bacteria/">NCBI's FTP site</a>
-      as of April 30, 2012. A webcast is available on
-      <a href="http://www.youtube.com/watch?v=cDtOMd2KRTc">YouTube</a>.
+      Click the button below to launch the demonstrations. It will probably be
+      a good idea for you to launch a worker, too :-)
     </div>
-    <div>
-      The first step is to make QMachine's JavaScript library available. To
-      include it directly within a webpage, as we have done here, add the
-      following snippet to your HTML:
-    </div>
-    <div class="inline-code">
-      &lt;script src="https://qmachine.org/q.js"&gt;&lt;/script&gt;
-    </div>
-    <div>
-      You can also import it dynamically from within an existing JavaScript
-      program by inserting these lines:
-    </div>
-    <div class="inline-code">
-      s = document.createElement('script');
-      s.src = 'https://qmachine.org/q.js';
-      document.body.appendChild(s);
-    </div>
-    <div>
-      In this illustration we will distribute the MapReduce decomposition of
-      sequence alignment described in (Almeida 2012),
-      <a href="http://usm.github.com">http://usm.github.com</a>. In that
-      report, the genome of one of those strains, R6, is probed for the longest
-      similar segment to "TCCACAGCATGCGTGACGATGACACG",
-    </div>
-    <div class="inline-code">
-      uBac = new usm('ftp://ftp.ncbi.nlm.nih.gov/genomes/Bacteria/Streptococ\
-        cus_pneumoniae_R6_uid57859/NC_003098.fna');
-      A = uBac.align('TCCACAGCATGCGTGACGATGACACG');
-    </div>
-    <div>
-      and three different segments of ten units each are found. Here, the
-      fourteen genomes, each approximately two million base pairs long, are
-      also made available as JavaScript function calls at
-      <a href="Pneumo">http://q.cgr.googlecode.com/hg/Pneumo</a>. An
-      abbreviated form of the
-      <a href="Pneumo/NC_003098.fna.js">
-        <span class="inline-code">fasta</span> call for R6</a> follows:
-    </div>
-    <div class="inline-code">
-      fasta({
-          name:"NC_003098.fna",
-          head:">gi|15902044|ref|NC_003098.1| Streptococcus pneumoniae R6, c\
-            omplete genome",
-          body:"TTGAAAGAAAAACAATTTTGGAATCGTATATTAGAA...TATTAAACTTTTAAATAGTAA\
-            AGGAGGAGAAAGGA"
-      });
-    </div>
-    <div>
-      The <a class="inline-code" href="fasta.js">fasta</a> function definition
-      is deceptively simple -- it's just a reference to QM's built-in
-      <a class="inline-code" href="https://qmachine.org/q.js">capture</a>
-      function, which itself only "captures" incoming data into a private state
-      variable where QM can find it again later. Here are the two definitions,
-      excerpted from their respective source files:
-    <!--
-      ... which accepts a URI reference as its input argument and which
-      returns an "asynchronous variable" ("avar"). Essentially, an avar is a
-      JavaScript object with a "key" property for identification and a "val"
-      property for data storage. As detailed in the QM manuscript, an avar is a
-      high-level container for arbitrary data along with the sequence of
-      transformations yet to be applied to that data.
-    -->
-    <!--
-      As detailed in the QM manuscript, an avar is a logical extension of
-      well-known JavaScript idioms into the domain of high-performance
-      computing, where event-driven, functional approaches are uncommon.
-    -->
-    <!--
-      whose value will contain the results
-      of the alignment  computation may be distributed by QM for
-      execution by other web browsers in parallel where this sequence matching
-      will be made for each of the fourteen genomes and the results returned
-      back to the invoking machine:
-    -->
-    </div>
-    <div class="inline-code">
-      capture = function (data) {
-       // This function "captures" incoming data by saving a reference to it
-       // in `state.shelf`. It is quite useful when combined with JSONP :-)
-          state.shelf.push(data);
-          return avar().revive();
-      };
-
-      global.fasta = Q.capture;
-    </div>
-    <div>
-      It may seem incomplete to present the definitions without their original
-      surrounding contexts, but doing so highlights the subtleties involved in
-      the problem itself and thereby explains our solution's design.
-    </div>
-    <div>
-      <span style="color:red">(placeholder)</span>
-    </div>
-    <div>
-      For example, for the R6 strain we can use this invocation:
-    </div>
-    <div class="inline-code">
-      Q.fasta('http://q.cgr.googlecode.com/hg/Pneumo/NC_003098.fna.js');
-    </div>
-    <div>
-      This will take a few seconds -- just wait for the console to display
-      "done!". The final result is stored in
-      <span class="inline-code">fasta.A</span>, which contains
-      the position or positions of the longest shared segments and looks
-      something like
-    </div>
-    <div class="inline-code">
-      fasta.A
-	Object
-	ind: 1
-	match: Array[4]
-	0: 0
-	1: 10
-	2: 10
-	3: 10
-	length: 4
-	__proto__: Array[0]
-	posBase: Array[4]
-	0: 0
-	1: 1811967
-	2: 1895547
-	3: 1992091
-	length: 4
-	__proto__: Array[0]
-	posProbe: Array[4]
-	0: 0
-	1: 5
-	2: 0
-	3: 14
-	length: 4
-	__proto__: Array[0]
-	__proto__: Object
-    </div>
-    <div>
-      As detailed in the USM paper, the longest shared segment has length 10,
-      and 10 different segments of that length were found in R6's genome. Now,
-      for the grand finale, let's compute the alignment results for each of
-      the 14 pneumococcal genomes simultaneously by using QM to distribute
-      individual tasks to volunteer web browsers. As detailed in the QM
-      manuscript, this strategy not only distributes the computational load,
-      but it also distributes the bandwidth requirements, too.
-    </div>
-    <div style="color:red">
-      (placeholder)
-    </div>
-    <div>
-      <button onclick="Q.lib('./fasta-demo.js')">Launch job on QM</button>
-      <button onclick="Q.lib('./daemon.js')">Volunteer for QM</button>
-    </div>
-    <div>
-      Note also that, thanks to the use of the
-      <a href="http://www.w3.org/TR/cors/">Cross-Origin Resource Sharing</a>
-      standard that is available in modern web browsers, you can construct
-      simple web pages to send to others so that, by simple opening the page,
-      they can volunteer their computers' resources to help run your jobs.
-      As an example, see
-      <a href="./volunteer.html?fasta-demo">volunteer.html</a>.
-    </div>
-    <script src="./markup.js"></script>
-    <script src="https://qmachine.org/q.js"></script>
+    <input type="button" value="Launch Demo"
+        onclick="QM.load_script('./code/demo.js')">
+    <script src="https://v1.qmachine.org/q.js"></script>
+    <script>
+        QM.box = "fasta-demo";
+    </script>
   </body>
 </html>
