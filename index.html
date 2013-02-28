@@ -28,11 +28,23 @@
       results into the developer's console. Remember to start a worker for
       "fasta-demo" :-)
     </div>
-    <input type="button" value="Launch Demo"
-        onclick="QM.load_script('./code/demo.js')">
+    <input type="button" id="launch-button" value="Launch Demo">
     <script src="https://v1.qmachine.org/q.js"></script>
     <script>
-        QM.box = "fasta-demo";
+        QM.box = 'fasta-demo';
+        document.getElementById('launch-button').onclick = function () {
+         // This function needs documentation.
+            QM.puts('Loading demo script ...');
+            QM.load_script('./code/demo.js').Q(function (evt) {
+             // This function needs documentation.
+                QM.puts('Distributing jobs ...');
+                return evt.exit();
+            }).on('error', function (message) {
+             // This function needs documentation.
+                throw message;
+            });
+            return;
+        };
     </script>
   </body>
 </html>
