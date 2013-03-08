@@ -2,7 +2,7 @@
 
 //- demo.js ~~
 //                                                      ~~ (c) SRW, 19 Jan 2013
-//                                                  ~~ last updated 28 Feb 2013
+//                                                  ~~ last updated 08 Mar 2013
 
 (function () {
     'use strict';
@@ -33,11 +33,12 @@
 
     box = 'fasta-demo';
 
+
     env = {
         usm: [
-         // http://goo.gl/YOa6A -->
+         // http://goo.gl/15nyz -->
             'https://jmat.googlecode.com/git-history/' +
-                '122e17249f1033f1086b748ced1f88e61ecfde01/jmat.js',
+                'd8c1a52c1cf2d142b5933b95b994e7bbe0a18924/jmat.js',
          // http://git.io/tAeG_w -->
             'https://raw.github.com/usm/usm.github.com/' +
                 'b3731f70770a1613e6251c79b249f7f2edcec3bd/usm.js'
