@@ -2,7 +2,7 @@
 <!--
     index.html ~~
                                                         ~~ (c) SRW, 28 Feb 2013
-                                                    ~~ last updated 04 Mar 2013
+                                                    ~~ last updated 08 Mar 2013
 -->
 <!--[if IE]><![endif]-->
 <html lang="en">
@@ -21,6 +21,7 @@
       to run them. QM will print the results into the developer's console.
     </div>
     <input type="button" id="launch-button" value="Launch Demo">
+    <input type="button" id="watch-screencast" value="Watch Screencast">
     <div>
       The code can be found in
       <a href="./code/demo.js" target="_blank">./code/demo.js</a>, and the
@@ -41,6 +42,11 @@
              // This function needs documentation.
                 throw message;
             });
+            return;
+        };
+        document.getElementById('watch-screencast').onclick = function () {
+         // This function needs documentation.
+            QM.puts('(placeholder)');
             return;
         };
     </script>
