@@ -48,7 +48,19 @@
         };
         document.getElementById('watch-screencast').onclick = function () {
          // This function needs documentation.
-            QM.puts('(placeholder)');
+            if (document.getElementById('iframe') !== null) {
+                console.log('The iframe has already been loaded.');
+                return;
+            }
+            var iframe;
+            iframe = document.createElement('iframe');
+            iframe.allowfullscreen = true;
+            iframe.frameborder = 0;
+            iframe.id = 'the-screencast';
+            iframe.height = 480;
+            iframe.width = 640;
+            iframe.src = 'https://www.youtube-nocookie.com/embed/81_n4Mt5mrE';
+            document.body.appendChild(iframe);
             return;
         };
     </script>
