@@ -2,7 +2,7 @@
 
 //- demo.js ~~
 //                                                      ~~ (c) SRW, 19 Jan 2013
-//                                                  ~~ last updated 08 Mar 2013
+//                                                  ~~ last updated 21 Mar 2013
 
 (function () {
     'use strict';
@@ -45,7 +45,7 @@
     };
 
     f = function (url) {
-     // This function could also be written in CoffeeScript trivally.
+     // This function could also be written in CoffeeScript trivially.
         return new usm(url, 'ACGT').alignQ('TCCACAGCATGCGTGACGATGACACG');
     };
 
