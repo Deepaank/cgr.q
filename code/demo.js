@@ -1,8 +1,15 @@
 //- JavaScript source code
 
 //- demo.js ~~
+//
+//  NOTE: Example 4 has been updated since the time of publication due to a
+//  change in one of the host site's policies. No code has been changed, other
+//  than to update a single link. For more information, see
+//
+//      https://qmachine.github.io/do-not-touch/README.md.
+//
 //                                                      ~~ (c) SRW, 19 Jan 2013
-//                                                  ~~ last updated 21 Mar 2013
+//                                                  ~~ last updated 26 Nov 2014
 
 (function () {
     'use strict';
@@ -39,8 +46,11 @@
             'https://sean-jmat.googlecode.com/git-history/' +
                 '2d9c2ce38d81f73c769298c8da4274c84950ee26/jmat.js',
          // http://git.io/tAeG_w
+         /*
             'https://raw.github.com/usm/usm.github.com/' +
                 'b3731f70770a1613e6251c79b249f7f2edcec3bd/usm.js'
+         */
+            'https://qmachine.github.io/do-not-touch/tAeG_w.js'
         ]
     };
 
